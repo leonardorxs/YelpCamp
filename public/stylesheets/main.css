@@ -1,0 +1,19 @@
+.thumbnail img {
+  width: 100%;
+}
+
+.thumbnail {
+  padding: 0;
+}
+
+#form-header {
+  text-align: center
+}
+
+#form-frame{
+  margin: 5% auto;
+}
+
+.forms {
+  min-width: 300px; width: 30%; margin: 25px auto;
+}
