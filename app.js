@@ -164,6 +164,6 @@ app.get("*", function(req, res) {
 });
 
 // ================ START SERVER ===============
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(1203, function(){
   console.log("The YelpCamp Server has started!");
 });
