@@ -10,7 +10,7 @@ var express  = require("express"),
   seedDB     = require("./seeds");
   
 
-mongoose.connect("mongodb://localhost/yelp_camp_v6");
+mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -46,12 +46,13 @@ app.get("/campgrounds", function(req, res){
 
 
 //NEW - Show form to create new campground
-app.get("/campgrounds/new", function(req, res){
+app.get("/campgrounds/new", isLoggedIn, function(req, res){
   res.render("campgrounds/new");
 });
 
 //CREATE - Add new campground to DB
-app.post("/campgrounds", function(req, res){
+app.post("/campgrounds", isLoggedIn, function(req, res){
+  console.log(req.user);
   //get data from form and add to campgrounds array
   var name = req.body.name;
   var image = req.body.image;
@@ -85,7 +86,7 @@ app.get("/campgrounds/:id", function(req, res){
 //COMMENTS ROUTES
 //=============================================================================
 
-app.get("/campgrounds/:id/comments/new", function(req, res){
+app.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res){
   //find campground by id
   Campground.findById(req.params.id, function(err, campground){
     if(err){
@@ -96,7 +97,7 @@ app.get("/campgrounds/:id/comments/new", function(req, res){
   });
 });
 
-app.post("/campgrounds/:id/comments", function(req, res){
+app.post("/campgrounds/:id/comments", isLoggedIn, function(req, res){
   // lookup campgrounds using ID
   Campground.findById(req.params.id, function(err, campground){
     if(err){
@@ -122,11 +123,11 @@ app.post("/campgrounds/:id/comments", function(req, res){
 
 // ==================== AUTH ROUTES ===============================
 //show register form
-app.get("/register",function(req,res){
+app.get("/register", isLoggedOut, function(req,res){
   res.render("register");
 });
 //handle signup logic
-app.post("/register", function(req, res) {
+app.post("/register", isLoggedOut, function(req, res) {
     var newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, function(err, user){
       if(err){
@@ -140,27 +141,42 @@ app.post("/register", function(req, res) {
 });
 
 //login form
-app.get("/login", function(req, res) {
+app.get("/login", isLoggedOut, function(req, res) {
   res.render("login"); 
 });
 //handle login logic // passport.authenticate is a callback that takes care of everything 
-app.post("/login", passport.authenticate("local", 
+app.post("/login", isLoggedOut, passport.authenticate("local", 
   {
     successRedirect: "/campgrounds",
     failureRedirect: "/login"
   }));
 
 //logout
-app.get("/logout", function(req, res) {
+app.get("/logout", isLoggedIn, function(req, res) {
   req.logout();
-  res.redirect("/campgrounds");
+  res.redirect("/login");
 });
 
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect("/login");
+}
 
+function isLoggedOut(req, res, next){
+  if(!req.isAuthenticated()){
+    return next();
+  }
+}
 
 //NOTFOUND
 app.get("*", function(req, res) {
   res.redirect("/"); 
+});
+
+app.get("/campgrounds/:*", function(req, res){
+  res.redirect("/");
 });
 
 // ================ START SERVER ===============
