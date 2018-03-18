@@ -1,7 +1,8 @@
 var express = require("express"),
     router  = express.Router();
+var moment  = require("moment");
+moment.locale('pt-br');  
 var Campground = require("../models/campground");
-
 
 //INDEX - SHOW ALL CAMPGROUNDS
 router.get("/", function(req, res){
@@ -49,7 +50,7 @@ router.get("/", function(req, res){
         res.redirect("/campgrounds");
       } else {
       //render show template with that campground id
-        res.render("campgrounds/show", {campground: foundCampground});
+        res.render("campgrounds/show", {campground: foundCampground, moment: moment});
       }
     });
   });
