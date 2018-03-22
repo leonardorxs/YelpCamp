@@ -19,15 +19,13 @@
         </div>
       </div>
       <div class="well">
-        <div class="text-right">
-          <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
-        </div>
-        <hr>
+            <a class="btn btn-success pull-right" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
+          <hr>
         <% campground.comments.forEach(function(comment){ %>
-          <div class="row">
+          <div class="row comment">
             <div class="col-md-12">
-              <strong><%= comment.author %></strong>
-              <span class="pull-right"> 
+              <strong><%= comment.author.username %></strong>
+              <span class="commentDate"> 
                 <%= moment(comment.date, "YYYYMMDD").fromNow(); %> 
               </span>
               <p>

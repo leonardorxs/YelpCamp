@@ -17,3 +17,8 @@
 .forms {
   min-width: 300px; width: 30%; margin: 25px auto;
 }
+
+.commentDate {
+  margin-left: 1%;
+  color: #999999;
+}
