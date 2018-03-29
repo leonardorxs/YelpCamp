@@ -1,19 +1,86 @@
-.thumbnail img {
+html, body{
+  min-height: 100%;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+.form-sign {
   width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
 }
 
-.thumbnail {
-  padding: 0;
+.form-sign .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
 }
 
-#form-header {
-  text-align: center
+.form-sign .form-label-group:first-of-type .form-control{
+  border-top-right-radius: .25rem;
+  border-top-left-radius: .25rem;
 }
 
-#form-frame{
-  margin: 5% auto;
+.form-sign .form-label-group .form-control{
+  margin-bottom: -1px;
+  border-radius: 0;
 }
 
-.forms {
-  min-width: 300px; width: 30%; margin: 25px auto;
+.form-sign .form-label-group:last-of-type .form-control{
+  border-bottom-right-radius: .25rem;
+  border-bottom-left-radius: .25rem;
+  margin-bottom: 10px;
+}
+
+.form-sign .form-label-group .form-control:focus{
+  z-index: 1;
+}
+
+
+.thumbnail img {
+  min-width: 50%;
+  max-width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  .thumbnail {
+    margin-top: 20px;
+  }
+
+  .thumbnail img {
+    width: 100%;
+  }
+}
+
+
+
+body {
+  margin-bottom: 80px; /* Margin bottom by footer height */
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #dadee0;
+}
+
+.username::first-letter {
+  text-transform: uppercase;
+}
+
+.input-group-text {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  margin-bottom: -1px;
+}
+
+textarea {
+  min-height: 4em;
 }

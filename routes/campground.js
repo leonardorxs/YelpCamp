@@ -6,13 +6,14 @@ var Campground = require("../models/campground");
 
 //INDEX - SHOW ALL CAMPGROUNDS
 router.get("/", function(req, res){
-    console.log(req.user);
     //Get all campgrounds from DB
-    Campground.find({}, function(err, allCampgrounds){
+    Campground.find({},[],{sort:{
+      date: 1 //Sort by Date Added DESC
+  }}, function(err, campgrounds){
       if(err){
         console.log(err);
       } else {
-        res.render("campgrounds/index", {campgrounds: allCampgrounds});
+        res.render("campgrounds/index", {campgrounds: campgrounds});
       }
     });
     
@@ -30,13 +31,19 @@ router.get("/", function(req, res){
     var name = req.body.name;
     var image = req.body.image;
     var desc = req.body.description;
-    var newCampground = {name: name, image: image, description: desc};
+    //relate author to campground
+    var author = {
+      id: req.user._id,
+      username: req.user.username
+    }
+    var newCampground = {name: name, image: image, description: desc, author: author};
     //Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
       if(err){
         res.redirect("/campgrounds");
       } else {
          //redirect back to campgrounds page
+         console.log(newlyCreated);
         res.redirect("/campgrounds");
       }
     });

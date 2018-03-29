@@ -16,7 +16,7 @@ var Comment = require("../models/comment")
     });
   });
   
-//CREATE NEW FORM
+//COMMENTS CREATE
   router.post("/", isLoggedIn, function(req, res){
     // lookup campgrounds using ID
     Campground.findById(req.params.id, function(err, campground){
@@ -29,10 +29,16 @@ var Comment = require("../models/comment")
           if(err){
             console.log(err);
           } else {
+            //add username and id to comment
+            comment.author.id = req.user._id;
+            comment.author.username = req.user.username;
+            //save comment
+            comment.save();
             // connect new comment to campground
             campground.comments.push(comment);
             campground.save();
             // redirect to campground showpage
+            console.log(comment);
             res.redirect("/campgrounds/" + campground._id);
           }
         });

@@ -1,24 +1,23 @@
-
 <% include ../partials/header %>
-
-<div class="container">
-  <div class="row">
-    <h1 style="text-align: center;">Create a New Comment to <%= campground.name %></h1>
-    <div style="min-width: 300px; width: 30%; margin: 25px auto;">
-      <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
-        <div class="form-group">
-          <input class="form-control" type="text" name="comment[text]" placeholder="text">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="text" name="comment[author]" placeholder="author">
-        </div>
-        <div class="form-group">
-           <button class="btn btn-large btn-primary btn-block">Submit!</button>
-        </div>
-      </form>
-      
-      <a href="../">Go back</a>  
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <form class="form-sign" action="/campgrounds/<%= campground._id %>/comments" method="POST">
+          <h1 class="text-center">Comente sobre: 
+            <%= campground.name %>
+          </h1>
+          <!-- <div class="form-label-group">
+            <label for="inputText" class="sr-only">Comentário:</label>
+            <input id="inputText" class="form-control" type="text" name="comment[text]" placeholder="Comentário">
+          </div> -->
+          <div class="form-group">
+            <label for="inputText" class="sr-only">Comentário</label>
+            <textarea class="form-control" id="inputText" rows="3" placeholder="Adicionar um comentário..."></textarea>
+          </div>
+          <input class="btn btn-large btn-primary btn-block" type="submit" value="Comentar!">
+        </form>
+      <a href="../">Voltar</a>
+      </div>
     </div>
   </div>
-</div>
-<% include ../partials/footer %>
+  <% include ../partials/footer %>

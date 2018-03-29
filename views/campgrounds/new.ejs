@@ -1,27 +1,37 @@
-
 <% include ../partials/header %>
 
-<div class="container">
-  <div class="row">
-    <h1 id="form-header">Create a new campground</h1>
-    <div style="min-width: 300px; width: 30%; margin: 25px auto;">
-      <form action="/campgrounds" method="POST">
-        <div class="form-group">
-          <input class="form-control" type="text" name="name" placeholder="name">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="text" name="image" placeholder="image url">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="text" name="description" placeholder="description">
-        </div>
-        <div class="form-group">
-           <button class="btn btn-large btn-primary btn-block">Submit!</button>
-        </div>
-      </form>
-      
-      <a href="/campgrounds">Go back</a>  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1 class="text-center">Cadastre um novo Acampamento!</h1>
+        <form class="form-sign" action="/campgrounds" method="POST">
+          <div class="form-label-group">
+            <label for="inputName" class="sr-only">Nome do Acampamento</label>
+            <input id="inputName" class="form-control" type="text" name="name" placeholder="Nome">
+          </div>
+          <div class="form-label-group">
+            <label for="inputImage" class="sr-only">URL da Imagem</label>
+            <input id="inputImage" class="form-control" type="text" name="image" placeholder="URL da imagem">
+          </div>
+          <div class="form-label-group">
+            <label for="inputPrice" class="sr-only">Preço</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">R$</div>
+              </div>
+              <input type="text" id="inputPrice" class="form-control" name="price" placeholder="10,00">
+            </div>
+          </div>
+          <div class="form-label-group">
+            <label for="inputDescription" class="sr-only">Descrição do Acampamento</label>
+            <textarea class="form-control" id="inputDescription" placeholder="Escreva uma descrição sobre seu acampamento..." name="description" rows="3"></textarea>
+          </div>
+
+          <button class="btn btn-large btn-primary btn-block">Cadastrar!</button>
+        </form>
+        <a href="/campgrounds">Voltar</a>
+      </div>
     </div>
   </div>
-</div>
-<% include ../partials/footer %>
+  </div>
+  <% include ../partials/footer %>
