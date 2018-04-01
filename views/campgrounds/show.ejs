@@ -13,7 +13,6 @@
           <li class="list-group-item">Info 3</li>
         </div>
       </div>
-<<<<<<< HEAD
       <div class="col-md-9">
         <div class="card mt-2">
           <img class="card-img-top border" src="<%= campground.image %>">
@@ -31,32 +30,6 @@
               </p>
               <p class="col-md-12">
                 <%= campground.description %>
-=======
-      <div class="well">
-<<<<<<< HEAD
-        <div>
-          <span class="pull-left">Comentários: </span>
-          <a class="pull-right btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Comentar</a>
-        </div>
-        <hr>
-=======
-            <a class="btn btn-success pull-right" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
-          <hr>
->>>>>>> e9c90b176f208d0e6d24e7d4b9a1039b9d9b063d
-        <% campground.comments.forEach(function(comment){ %>
-          <div class="row comment">
-            <div class="col-md-12">
-              <strong><%= comment.author.username %></strong>
-<<<<<<< HEAD
-              <span style="margin-left: 1%"> 
-=======
-              <span class="commentDate"> 
->>>>>>> e9c90b176f208d0e6d24e7d4b9a1039b9d9b063d
-                <%= moment(comment.date, "YYYYMMDD").fromNow(); %> 
-              </span>
-              <p>
-                <%= comment.text %>
->>>>>>> 67757274d3af65623847d602294158d326e058db
               </p>
             </div>
           </div>
