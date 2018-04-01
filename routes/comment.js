@@ -1,8 +1,8 @@
-var express = require("express"),
+const express = require("express"),
     router  = express.Router({mergeParams: true});
 
-var Campground = require("../models/campground");
-var Comment = require("../models/comment")
+const Campground = require("../models/campground");
+const Comment = require("../models/comment")
 
 //SHOW COMMENT FORM
     router.get("/new", isLoggedIn, function(req, res){

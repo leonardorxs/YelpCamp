@@ -1,11 +1,12 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var commentSchema = mongoose.Schema({
+const commentSchema = mongoose.Schema({
 	text: String,
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "User"
+			ref: "User",
+			required: true
 		},
 		username: String
 	},

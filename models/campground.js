@@ -1,19 +1,30 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var campgroundSchema = new mongoose.Schema({
-	name: String,
-	image: String,
-	description: String,
+const campgroundSchema = new mongoose.Schema({
+	name: {
+		type: String,
+		requrired: true,
+		unique: true
+	},
+	image: {
+		type: String,
+		required: true
+	},
+	description: {
+		type: String,
+		required: true
+	},
 	date: { type: Date, default: Date.now },
-	price: { type: Number, min: 0 },
+	price: { type: Number, min: 0, default: 0.00 },
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "User"
+			ref: "User",
+			required: true
 		},
 		username: String
 	},
-   comments: [
+    comments: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Comment"

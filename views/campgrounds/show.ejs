@@ -1,51 +1,67 @@
 <% include ../partials/header %>
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <p class="lead"><a href="#"><%= campground.name %></a></p>
-      <div class="list-group">
-        <li class="list-group-item active">Info 1</li>
-        <li class="list-group-item">Info 2</li>
-        <li class="list-group-item">Info 3</li>
-      </div>
-    </div>
-    <div class="col-md-9">
-      <div class="thumbnail">
-        <div class="text-center"><img class="img-responsive" src="<%= campground.image %>"></div>
-        <div class="caption">
-          <div class="row">
-            <p class="col-xs-6">Adicionado por: <a href="/users/<%= campground.author.id %>"> <%= campground.author.username %></a>,
-            <span> <%= moment(campground.date, "YYYYMMDD").fromNow(); %>  </span>
-            <span class="col-xs-6 text-right"><%= campground.price %></span>
-          </p>
-          </div>
-          <div class="row">
-           <p class="col-xs-12"><%= campground.description %></p>
-          </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <p class="lead">
+          <a href="#">
+            <%= campground.name %>
+          </a>
+        </p>
+        <div class="list-group">
+          <li class="list-group-item active">Info 1</li>
+          <li class="list-group-item">Info 2</li>
+          <li class="list-group-item">Info 3</li>
         </div>
       </div>
-      <div class="well">
-        <div>
-          <span class="pull-left">Comentários: </span>
-          <a class="pull-right btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Comentar</a>
-        </div>
-        <hr>
-        <% campground.comments.forEach(function(comment){ %>
-          <div class="row">
-            <div class="col-md-12">
-              <strong><%= comment.author.username %></strong>
-              <span style="margin-left: 1%"> 
-                <%= moment(comment.date, "YYYYMMDD").fromNow(); %> 
-              </span>
-              <p>
-                <%= comment.text %>
+      <div class="col-md-9">
+        <div class="card mt-2">
+          <img class="card-img-top border" src="<%= campground.image %>">
+          <div class="caption container mt-2">
+            <div class="row">
+              <p class="col-sm-9 font-weight-bold">Adicionado por:
+                <a href="/users/<%= campground.author.id %>">
+                  <%= campground.author.username %></a>,
+                <span>
+                  <%= moment(campground.date, "YYYYMMDD").fromNow(); %>
+                </span>
+              </p>
+              <p class="col-sm-3 text-right">Diária: R$
+                <%= campground.price.toFixed(2) %>
+              </p>
+              <p class="col-md-12">
+                <%= campground.description %>
               </p>
             </div>
           </div>
-        <% }); %>
+        </div>
+        <hr>
+        <div class="card container" style="margin-top: -1px;">
+          <div class="row mt-3">
+            <p class="col-md-6 my-auto">
+              <%= campground.comments.length %> comentários </p>
+            <p class="col-md-6 my-auto text-right">
+              <a class="btn btn-success mx-auto" href="/campgrounds/<%= campground._id %>/comments/new">Comentar</a>
+            </p>
+          </div>
+          <hr>
+          <% campground.comments.forEach(function(comment){ %>
+            <div class="row">
+              <div class="col-md-12">
+                <strong>
+                  <%= comment.author.username %>
+                </strong>
+                <span style="margin-left: 1%">
+                  <%= moment(comment.date, "YYYYMMDD").fromNow(); %>
+                </span>
+                <p>
+                  <%= comment.text %>
+                </p>
+              </div>
+            </div>
+            <% }); %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-  
-<% include ../partials/footer %>
+
+  <% include ../partials/footer %>
