@@ -32,8 +32,14 @@ const Comment = require("../models/comment")
             //add username and id to comment
             comment.author.id = req.user._id;
             comment.author.username = req.user.username;
+<<<<<<< HEAD
             //save comment
             comment.save();
+=======
+            //save the comment
+            comment.save();
+            console.log(comment);
+>>>>>>> e9c90b176f208d0e6d24e7d4b9a1039b9d9b063d
             // connect new comment to campground
             campground.comments.push(comment);
             campground.save();
