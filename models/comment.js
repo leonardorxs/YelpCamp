@@ -5,6 +5,9 @@ const commentSchema = mongoose.Schema({
 =======
 var commentSchema = mongoose.Schema({
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 67757274d3af65623847d602294158d326e058db
+=======
 >>>>>>> 67757274d3af65623847d602294158d326e058db
 	text: String,
 	author: {
