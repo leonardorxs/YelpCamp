@@ -5,12 +5,15 @@ const UserSchema = new mongoose.Schema({
   username: { 
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    minlength: [3, "O nome de usuário deve ter entre 3 e 12 caracteres."],
+    maxlength: [12, "O nome de usuário deve ter entre 3 e 12 caracteres."]
   },
   password: { 
-    type: String,
-    required: true    
-  },
+      type: String,
+      minlength: [8, "A senha deve ter entre 8 e 20 caracteres"],
+      maxlength: [20, "A senha deve ter entre 8 e 20 caracteres"] 
+    },
   date: { type: Date, default: Date.now },
   active: {type: Boolean, default: true}
 });

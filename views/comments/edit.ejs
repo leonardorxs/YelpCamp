@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+<% include ../partials/nav %>
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-md-12">
+					<h1 class="text-center">Alterar comentário
+					</h1>
+				<form class="form-sign" action="/campgrounds/<%= campground_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+					<div class="form-group">
+						<label for="inputText" class="sr-only">Comentário</label>
+						<textarea class="form-control" id="inputText" rows="3" name="comment[text]" placeholder="Adicionar um comentário..." autofocus><%= comment.text %></textarea>
+					</div>
+					<input class="btn btn-large btn-primary btn-block" type="submit" value="Comentar!">
+				</form>
+			</div>
+		</div>
+	</div>
+<% include ../partials/footer %>

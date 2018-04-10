@@ -3,8 +3,10 @@ const mongoose = require("mongoose");
 const campgroundSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		requrired: true,
-		unique: true
+		required: true,
+		unique: true,
+		minlength: [3, "O nome do acampamento deve ter entre 3 e 30 caracteres" ],
+		maxlength: [30, "O nome do acampamento deve ter entre 3 e 30 caracteres"]
 	},
 	image: {
 		type: String,
@@ -12,10 +14,20 @@ const campgroundSchema = new mongoose.Schema({
 	},
 	description: {
 		type: String,
-		required: true
+		required: true,
+		minlength: [3, "O comentário deve ter entre 3 e 300 caracteres" ],
+		maxlength: [300, "O o comentário deve ter entre 3 e 300 caracteres"]
 	},
-	date: { type: Date, default: Date.now },
-	price: { type: Number, min: 0, default: 0.00 },
+	date: { 
+		type: Date, 
+		default: Date.now 
+	},
+	price: { 
+		type: Number, 
+		default: 0.00 , 
+		min: 0,
+		max: 999
+	},
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,

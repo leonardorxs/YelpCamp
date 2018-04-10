@@ -1,0 +1,38 @@
+<% include ../partials/header %>
+<% include ../partials/nav %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1 class="text-center">Editar '<%= campground.name %>'!</h1>
+        <form class="form-sign" action="/campgrounds/<%= campground._id %>/?_method=PUT" method="POST">
+          <div class="form-label-group">
+            <label for="inputName" class="sr-only">Nome do Acampamento</label>
+            <input id="inputName" class="form-control" type="text" name="campground[name]" placeholder="Nome do Acampamento autofocus" value="<%= campground.name %>">
+          </div>
+          <div class="form-label-group">
+            <label for="inputImage" class="sr-only">URL da Imagem</label>
+            <input id="inputImage" class="form-control" type="text" name="campground[image]" placeholder="URL da Imagem" value=" <%= campground.image %>">
+          </div>
+          <div class="form-label-group">
+            <label for="inputPrice" class="sr-only">Preço</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">R$/ dia</div>
+              </div>
+              <input type="text" id="inputPrice" class="form-control" placeholder="10.00" name="campground[price]" value=" <%= campground.price %>">
+            </div>
+          </div>
+          <div class="form-label-group">
+            <label for="inputDescription" class="sr-only">Descrição do Acampamento</label>
+            <textarea class="form-control" id="inputDescription" name="campground[description]" placeholder="Escreva uma descrição sobre seu acampamento..." rows="3"><%= campground.description %></textarea>
+          </div>
+
+          <button class="btn btn-large btn-primary btn-block">Cadastrar!</button>
+        </form>
+        <a href="/campgrounds">Voltar</a>
+      </div>
+    </div>
+  </div>
+  </div>
+  <% include ../partials/footer %>

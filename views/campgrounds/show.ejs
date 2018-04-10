@@ -1,67 +1,101 @@
 <% include ../partials/header %>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <p class="lead">
-          <a href="#">
-            <%= campground.name %>
-          </a>
-        </p>
-        <div class="list-group">
-          <li class="list-group-item active">Info 1</li>
-          <li class="list-group-item">Info 2</li>
-          <li class="list-group-item">Info 3</li>
-        </div>
-      </div>
-      <div class="col-md-9">
-        <div class="card mt-2">
-          <img class="card-img-top border" src="<%= campground.image %>">
-          <div class="caption container mt-2">
-            <div class="row">
-              <p class="col-sm-9 font-weight-bold">Adicionado por:
-                <a href="/users/<%= campground.author.id %>">
-                  <%= campground.author.username %></a>,
-                <span>
-                  <%= moment(campground.date, "YYYYMMDD").fromNow(); %>
-                </span>
-              </p>
-              <p class="col-sm-3 text-right">Diária: R$
-                <%= campground.price.toFixed(2) %>
-              </p>
-              <p class="col-md-12">
-                <%= campground.description %>
-              </p>
+<% include ../partials/nav %>
+  <% include ../partials/commentModal %>
+    <% include ../partials/campgroundModal %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3" style="overflow-wrap: break-word">
+            <h2>
+              <a class="text-dark" href="#">
+                <%= ((campground) ? campground.name : null) %>
+              </a>
+            </h2>
+            <div class="list-group">
+              <li class="list-group-item active">Info 1</li>
+              <li class="list-group-item">Info 2</li>
+              <li class="list-group-item">Info 3</li>
             </div>
           </div>
-        </div>
-        <hr>
-        <div class="card container" style="margin-top: -1px;">
-          <div class="row mt-3">
-            <p class="col-md-6 my-auto">
-              <%= campground.comments.length %> comentários </p>
-            <p class="col-md-6 my-auto text-right">
-              <a class="btn btn-success mx-auto" href="/campgrounds/<%= campground._id %>/comments/new">Comentar</a>
-            </p>
-          </div>
-          <hr>
-          <% campground.comments.forEach(function(comment){ %>
-            <div class="row">
-              <div class="col-md-12">
-                <strong>
-                  <%= comment.author.username %>
-                </strong>
-                <span style="margin-left: 1%">
-                  <%= moment(comment.date, "YYYYMMDD").fromNow(); %>
-                </span>
-                <p>
-                  <%= comment.text %>
-                </p>
+          <div class="col-md-9">
+            <div class="card">
+              <img class="card-img-top border" src="<%= campground.image %>" alt="<%= campground.name %>">
+              <div class="caption container mt-2">
+                <div class="row">
+                  <p class="col-9 text-muted">
+                    <span class="font-weight-bold">Adicionado por:
+                      <a href="/users/<%= ((campground) ? campground.author.id : null) %>">
+                        <%= ((campground) ? campground.author.username : null) %>
+                      </a>
+                    </span>,
+                    <%= moment(campground.date, "YYYYMMDD").fromNow(); %>
+                  </p>
+                  <p class="col-3 text-right">Diária: R$
+                    <%= campground.price %>
+                  </p>
+                </div>
+                <div class="row">
+                  <% if(currentUser && campground.author.id.equals(currentUser._id)){  %>
+                    <p>
+                      <a class="btn btn-sm btn-warning ml-3" href="/campgrounds/<%= campground._id %>/edit">Editar</a>
+                      <button type="button" class="btn btn-sm btn-danger " data-toggle="modal" data-target="#campgroundModal">
+                        Excluir
+                      </button>
+                    </p>
+                    <% } %>
+                </div>
+                <div class="row">
+                  <p class="col-md-12">
+                    <%= campground.description %>
+                  </p>
+                </div>
               </div>
             </div>
-            <% }); %>
+            <hr>
+            <div id="commentsSection" class="card container">
+              <div class="row mt-3">
+                <p class="col-md-6 my-auto">
+                  <%= campground.comments.length %> comentários
+                </p>
+                <p class="col-md-6 my-auto text-right">
+                  <a class="btn btn-success mx-auto" href="/campgrounds/<%= campground._id %>/comments/new">Comentar</a>
+                </p>
+              </div>
+              <hr>
+              <% campground.comments.forEach(function(comment){ %>
+                <div class="row mb-2">
+                  <div class="col-sm-6 my-auto">
+                    <strong>
+                      <a href="/users/<%= comment.author.id %>">
+                        <%= comment.author.username %>
+                      </a>
+                    </strong>
+                    <span class="ml-1 text-muted">
+                      <%= moment(comment.date, "YYYYMMDD").fromNow(); %>
+                    </span>
+                  </div>
+                  <div class="col-sm-6 text-sm-right">
+                    <% if(currentUser && campground.author.id.equals(currentUser._id)){  %>
+                      <a href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit" class="btn btn-sm btn-warning">Editar</a>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btnDelete btn btn-sm btn-danger " data-toggle="modal" data-target="#commentModal">
+                        Excluir
+                        <input class="commentId" type="hidden" name="commentId" value="<%= comment.id %>">
+                      </button>
+                      <% } %>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-md-12">
+                    <p>
+                      <%= comment.text %>
+                    </p>
+                  </div>
+                </div>
+
+                <% }); %>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <% include ../partials/footer %>
+      <% include ../partials/footer %>

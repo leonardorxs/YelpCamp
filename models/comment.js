@@ -5,10 +5,13 @@ const commentSchema = mongoose.Schema({
 	author: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "User",
-			required: true
+			ref: "User"
 		},
-		username: String
+		username: {
+			type: String,
+			minlength: [3, "O nome de usuário deve ter entre 3 e 12 caracteres."],
+			maxlength: [12, "O nome de usuário deve ter entre 3 e 12 caracteres."]
+		}
 	},
 	date: { type: Date, default: Date.now }
 });
