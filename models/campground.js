@@ -23,8 +23,8 @@ const campgroundSchema = new mongoose.Schema({
 		default: Date.now 
 	},
 	price: { 
-		type: Number, 
-		default: 0.00 , 
+		type: String, 
+		default: 0 , 
 		min: 0,
 		max: 999
 	},
