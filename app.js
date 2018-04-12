@@ -43,6 +43,7 @@ passport.use(new FacebookStrategy({
   callbackURL: "https://calm-harbor-29946.herokuapp.com/auth/facebook/callback"
 },
 function(accessToken, refreshToken, profile, done) {
+  console.log(accessToken, refreshToken, profile, done);
   User.findOrCreate(profile, function(err, user) {
     if (err) { return done(err); }
     done(null, user);
