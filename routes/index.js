@@ -39,7 +39,7 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
     successRedirect: '/campgrounds',
-    failureRedirect: '/login'
+    failureRedirect: '/register'
   }));
 
 //handle login logic // passport.authenticate is a callback that takes care of everything 
