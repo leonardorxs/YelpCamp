@@ -35,8 +35,8 @@ router.get("/login", middleware.isLoggedOut, function (req, res) {
 });
 
 //FACEBOOK LOGIN
-app.get('/auth/facebook', passport.authenticate('facebook'));
-app.get('/auth/facebook/callback',
+router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
     successRedirect: '/campgrounds',
     failureRedirect: '/login'
