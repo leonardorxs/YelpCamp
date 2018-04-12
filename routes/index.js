@@ -38,7 +38,9 @@ router.get("/login", middleware.isLoggedOut, function (req, res) {
 router.post("/login", middleware.isLoggedOut, passport.authenticate("local",
   {
     successRedirect: "campgrounds",
-    failureRedirect: "/login"
+    failureRedirect: "/login",
+    failureFlash: 'Invalid username or password',
+    successFlash: 'Seja bem-vindo, você foi cadastrado!'
   }));
 
 //logout
