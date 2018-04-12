@@ -23,7 +23,7 @@ router.post("/register", middleware.isLoggedOut, function (req, res) {
       return res.redirect("back");
     }
     passport.authenticate("local")(req, res, function () {
-      req.flash("success", "Seja bem-vindo, " + req.user.username);
+      req.flash("success", "Seja bem-vindo, " + req.user.username + ". Você foi cadastrado com sucesso!");
       res.redirect("/campgrounds");
     });
   });
@@ -39,8 +39,8 @@ router.post("/login", middleware.isLoggedOut, passport.authenticate("local",
   {
     successRedirect: "campgrounds",
     failureRedirect: "/login",
-    failureFlash: 'Invalid username or password',
-    successFlash: 'Seja bem-vindo, você foi cadastrado!'
+    failureFlash: 'Usuário ou senha inválidos',
+    successFlash: 'Seja bem-vindo de volta'
   }));
 
 //logout
