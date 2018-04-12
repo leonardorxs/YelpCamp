@@ -34,6 +34,14 @@ router.get("/login", middleware.isLoggedOut, function (req, res) {
   res.render("login");
 });
 
+//FACEBOOK LOGIN
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: '/campgrounds',
+    failureRedirect: '/login'
+  }));
+
 //handle login logic // passport.authenticate is a callback that takes care of everything 
 router.post("/login", middleware.isLoggedOut, passport.authenticate("local",
   {

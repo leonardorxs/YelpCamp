@@ -1,4 +1,4 @@
-var express  = require("express"),
+const express  = require("express"),
   app        = express(),
   bodyParser = require("body-parser"),
   mongoose   = require("mongoose"),
@@ -6,13 +6,14 @@ var express  = require("express"),
   passport   = require("passport"),
   methodOverride = require("method-override"),
   LocalStrategy = require("passport-local"),
+  FacebookStrategy = require("passport-facebook"),
   Campground = require("./models/campground"),
   Comment    = require("./models/comment"),
   User       = require("./models/user"),
   seedDB     = require("./seeds");
   
 //requiring routes
-var campgroundRoutes = require("./routes/campground")
+const campgroundRoutes = require("./routes/campground")
     commentRoutes    = require("./routes/comment"),
     indexRoutes      = require("./routes/index");
 
@@ -34,6 +35,7 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new FacebookStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next){
