@@ -12,6 +12,8 @@ const express  = require("express"),
   User       = require("./models/user"),
   seedDB     = require("./seeds");
   
+const FACEBOOK_APP_ID = '1901691233209219',
+  FACEBOOK_APP_SECRET = '32fe5c8af03365b204d7118c03d339ac';
 //requiring routes
 const campgroundRoutes = require("./routes/campground")
     commentRoutes    = require("./routes/comment"),
@@ -36,9 +38,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new FacebookStrategy({
-  clientID: "1901691233209219",
-  clientSecret: "32fe5c8af03365b204d7118c03d339ac",
-  callbackURL: "https://calm-harbor-29946.herokuapp.com"
+  clientID: FACEBOOK_APP_ID,
+  clientSecret: FACEBOOK_APP_SECRET,
+  callbackURL: "https://calm-harbor-29946.herokuapp.com/auth/facebook/callback"
 },
 function(accessToken, refreshToken, profile, done) {
   User.findOrCreate(profile, function(err, user) {
