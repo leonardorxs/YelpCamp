@@ -35,7 +35,19 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
-passport.use(new FacebookStrategy(User.authenticate()));
+passport.use(new FacebookStrategy({
+  clientID: 1901691233209219,
+  clientSecret: "Criado por Leonardorxs",
+  callbackURL: "https://calm-harbor-29946.herokuapp.com"
+},
+function(accessToken, refreshToken, profile, done) {
+  User.findOrCreate(profile, function(err, user) {
+    if (err) { return done(err); }
+    done(null, user);
+  });
+}
+));
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next){
