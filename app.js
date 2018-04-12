@@ -37,7 +37,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new FacebookStrategy({
   clientID: 1901691233209219,
-  clientSecret: "Criado por Leonardorxs",
+  clientSecret: "32fe5c8af03365b204d7118c03d339ac",
   callbackURL: "https://calm-harbor-29946.herokuapp.com"
 },
 function(accessToken, refreshToken, profile, done) {
