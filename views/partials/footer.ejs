@@ -23,6 +23,8 @@
         document.commentForm.action = 
         document.commentForm.action.replace("comment_id", $(".commentId", this).val());
       });
+
+      $(".fb-login-button *").attr("disabled", "disabled").off('click');
     </script>
   </body>
 
