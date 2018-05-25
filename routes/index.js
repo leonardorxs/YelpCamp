@@ -58,4 +58,8 @@ router.get("/logout", middleware.isLoggedIn, function (req, res) {
   res.redirect("/login");
 });
 
+router.get("/about", function(req, res){
+  res.render("about");
+})
+
 module.exports = router;
