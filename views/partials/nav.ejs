@@ -1,65 +1,65 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 py-2">
-        <div class="container my-auto">
-          <a class="navbar-brand" href="/">YelpCamp</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item <%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %>">
-                <a class="nav-link" href="/campgrounds">Início
-                  <span class="sr-only"> (current)</span>
-                </a>
-              </li>
-            </ul>
-            <ul class="navbar-nav navbar-right">
-              <% if(!currentUser){ %>
-                <li class="nav-item">
-                  <a class="nav-link" href="/login">Entre</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/register">Cadastre-se</a>
-                </li>
-                <% } else { %>
-                  <li class="nav-item">
-                    <a class="nav-link username" href="#">
-                      <%= currentUser.username %>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/logout">Sair</a>
-                  </li>
-                  <% } %>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div class="container">
-        <% if(alertMessage.error && alertMessage.error.length > 0) {%>
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <%= alertMessage.error %>
+  <div class="container my-auto">
+    <a class="navbar-brand" href="/">YelpCamp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %>">
+          <a class="nav-link" href="/campgrounds">Início
+            <span class="sr-only"> (current)</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right">
+        <% if(!currentUser){ %>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Entre</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Cadastre-se</a>
+          </li>
+          <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link username" href="#">
+                <%= currentUser.username %>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Sair</a>
+            </li>
+            <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <% if(alertMessage.error && alertMessage.error.length > 0) {%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <%= alertMessage.error %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <% } %>
+
+      <% if(alertMessage.success && alertMessage.success.length > 0) {%>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= alertMessage.success %>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
-             </button>
-          </div>
-          <% } %>
-    
-            <% if(alertMessage.success && alertMessage.success.length > 0) {%>
-              <div class="alert alert-success alert-dismissible fade show" role="alert">
-                  <%= alertMessage.success %>
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                   </button>
-                </div>
-              <% } %>
-    
-              <% if(alertMessage.warning && alertMessage.warning.length > 0) {%>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <%= alertMessage.warning %>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                     </button>
-                  </div>
-                <% } %>
-      </div>
+            </button>
+        </div>
+        <% } %>
+
+          <% if(alertMessage.warning && alertMessage.warning.length > 0) {%>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <%= alertMessage.warning %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <% } %>
+</div>
